@@ -36,13 +36,7 @@ When all the programs are run, it is time to real pain)))
 
 just run this comands in the same terminal as before (check venv before your current path)
 
-pip install --upgrade google-api-python-client
-pip install scanpy
-pip install opencv-python
-pip install aiohttp
-python -m pip install "kivy[base]"
-pip install biopython
-pip install beautifulsoup4
+pip install -r requirements.txt
 
 Then run the script
 
