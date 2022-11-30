@@ -34,10 +34,11 @@ def conditional_reduce(*args):
     coll = list(filter(functions_list[0], coll))
     while len(coll) != 1:
         coll[0]=functions_list[1](coll[0], coll[1])
-        del [1]
+        del coll[1]
     return coll
-        
-         
+       
+res = conditional_reduce(lambda x: x < 5, lambda x, y: x + y, [1, 3, 5, 10])
+print(res)        
     
 
 
@@ -47,10 +48,12 @@ def conditional_reduce(*args):
 # my_chain = func_chain(lambda x: x + 2, lambda x: (x/4, x//4)). my_chain(37) -> (9.75, 9). 
 # +2 дополнительных балла за интеграцию этой функции в 1 задание.
 def func_chain(*args):
-    functions_list = [*args]
-    for  i in functions_list:
-        x = lambda x: i(x)
-    return x
+    def run_pipe(x: int):
+        res = x
+        for f in args:
+            res = f(res)
+        return res
+    return run_pipe
     
     
 
@@ -60,14 +63,35 @@ def func_chain(*args):
 # Не используйте саму функцию partial. Например: 
 # ax1_mean, ax1_max, ax1_sum = multiple_partial(np.mean, np.max, np.sum, axis=1)
 def multiple_partial(*args, **kwargs):
-    func_list = [*args]
-    kwd = {**kwargs}
-    for function in func_list:
-        return function(kwd)
+    def func_maker(*args, **kwargs):
+        func_list = [*args]
+        kwd = {**kwargs}
+        ret_func_list = []
+        for func in func_list:
+            return func(**kwargs)
+    return func_maker
 # Реализуйте полный аналог функции print без использования её самой (без аргумента flush).
 # В этом деле вам может помочь встроенный модуль sys.
-def personal_print(*args, sep, end, file):
-    pass
+def personal_print(*args, sep = ' ', end = '\n', file = None):
+    if file == None:
+        return f"{sep}".join([*args])+f"{end}"
+    
+# Print objects to the text stream file, separated by sep and followed by end. sep, end, file, 
+# and flush, if present, must be given as keyword arguments.
+
+# All non-keyword arguments are converted to strings like str() does and written to the stream, 
+# separated by sep and followed by end. Both sep and end must be strings; they can also be None, 
+# which means to use the default values. If no objects are given, print() will just write end.
+
+# The file argument must be an object with a write(string) method; if it is not present or None, 
+# sys.stdout will be used. Since printed arguments are converted to text strings, print() 
+# cannot be used with binary mode file objects. For these, use file.write(...) instead.
+
+# Whether the output is buffered is usually determined by file, but if the flush keyword argument 
+# is true, the stream is forcibly flushed.
+
+# Changed in version 3.3: Added the flush keyword argument.    
+
 # Требования:
 # Все функции реализуйте в файле functional.py
 # Код вне функций писать не нужно, реализовывать интерфейс для взаимодействия с пользователем 
