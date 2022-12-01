@@ -1,32 +1,18 @@
 
-# sequential_map - функция должна принимать в качестве аргументов любое количество функций 
-# (позиционными аргументами, НЕ списком), а также контейнер с какими-то значениями. 
-# Функция должна возвращать список результатов последовательного применения переданных функций 
-# к значениям в контейнере. 
-def sequential_map(*args):
+def sequential_map_2(*args):
     *functions_list, coll = [*args]
-    for i in functions_list:
-        coll = list(map(i, coll))
-    return coll
+    #for i in functions_list:
+    #    coll = list(map(i, coll)) это был код до того, как я реализовал func_chain
+    #return coll
+    pipeline = func_chain(*functions_list) #тут уже интегрирована функция, которая дальше по заданию
+    return pipeline(coll)
 
-print(sequential_map(lambda x: x**2, lambda x: x**(0.5), lambda x: x**3, [1, 2, 3, 4, 5]))
-
-# consensus_filter - функция должна принимать в качестве аргументов любое количество функций 
-# (позиционными  аргументами, НЕ списком), возвращающих True или False, а также контейнер с какими-то
-#  значениями. Функция должна возвращать список значений, которые при передаче их во все функции 
-# дают True.
 def consensus_filter(*args):
     *functions_list, coll = [*args]
     for i in functions_list:
         coll = list(filter(i, coll))
     return coll
 
-print(consensus_filter(lambda x: x > 0, lambda x: x > 5, lambda x: x < 10, [-2, 0, 4, 6, 11]))
-
-# conditional_reduce - функция должна принимать 2 функции, а также контейнер с значениями. 
-# Первая функция должна принимать 1 аргумент и возвращать True или False, вторая также принимает 2 
-# аргумента и возвращает значение (как в обычной функции reduce). conditional_reduce должна возвращать
-#  одно значение - результат reduce, пропуская значения с которыми первая функция выдала False. 
 def conditional_reduce(*args):
     *functions_list, coll = [*args]
     coll = list(filter(functions_list[0], coll))
@@ -37,11 +23,7 @@ def conditional_reduce(*args):
         return coll
     else:
         return coll
-print(conditional_reduce(lambda x: x < 5, lambda x, y: x + y, [1, 3, 5, 10]))              
-
-# func_chain - функция должна принимать в качестве аргументов любое количество функций (позиционными 
-#  аргументами, НЕ списком). Функция должна возвращать функцию, объединяющую все переданные 
-# последовательным выполнением.
+         
 def func_chain(*args):
     def run_pipe(x: int):
         if type(x) == int or type(x) == float:
@@ -57,17 +39,7 @@ def func_chain(*args):
             return res
     return run_pipe
 
-# Интеграция func_chain в первую функцию 
 
-def sequential_map_2(*args):
-    *functions_list, coll = [*args]
-    pipeline = func_chain(*functions_list)
-    return pipeline(coll)
-print(sequential_map_2(lambda x: x**2, lambda x: x**(0.5), lambda x: x**3, [1, 2, 3, 4, 5]))
-# Реализовать функцию  multiple_partial - аналог функции partial, но которая принимает неограниченное 
-# число функций в качестве аргументов и возвращает список из такого же числа "частичных функций". 
-# Не используйте саму функцию partial. Например: 
-# ax1_mean, ax1_max, ax1_sum = multiple_partial(np.mean, np.max, np.sum, axis=1)
 def multiple_partial(*args, **kwargs):
     func_list = [*args]
     kwd = {**kwargs}
@@ -102,12 +74,3 @@ def personal_print(*args: str, sep = '', end = '\n', file = s.stdout):
 # is true, the stream is forcibly flushed.
 
 # Changed in version 3.3: Added the flush keyword argument.    
-
-# Требования:
-# Все функции реализуйте в файле functional.py
-# Код вне функций писать не нужно, реализовывать интерфейс для взаимодействия с пользователем 
-# тоже не надо
-# Использовать любые библиотеки (в том числе встроенные модули) запрещается. 
-# Используем только функционал "голого" питона. Для отладки и тестирования можно использовать 
-# что угодно, но в финальном скрипте этого быть не должно. 
-# P.S. Кроме второго дополнительного задания, там можно использовать модуль sys. 
