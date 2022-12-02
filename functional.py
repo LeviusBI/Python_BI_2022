@@ -41,24 +41,25 @@ def func_chain(*args):
 
 
 def multiple_partial(*args, **kwargs):
-    func_list = [*args]
-    kwd = {**kwargs}
+    def func_maker(func, **kwargs):
+        return lambda x: func(x, **kwargs)
     ret_func_list = []
-    for func in func_list:
-        ret_func_list
+    for func in args:
+        res = func_maker(func, **kwargs)
+        ret_func_list.append(res)
     return ret_func_list
 # Реализуйте полный аналог функции print без использования её самой (без аргумента flush).
 # В этом деле вам может помочь встроенный модуль sys.
 import sys as s 
-def personal_print(*args: str, sep = '', end = '\n', file = s.stdout):
-    if file == s.stdout:
+def personal_print(*args: str, sep=' ', end='\n', file = None):
+    if file == None:
         result = ""
         for i in args:
             result += f"{i}{sep}"
-        return "result %{end}"
+        s.stdout.write()
     else: 
         pass
- 
+
 # Print objects to the text stream file, separated by sep and followed by end. sep, end, file, 
 # and flush, if present, must be given as keyword arguments.
 
