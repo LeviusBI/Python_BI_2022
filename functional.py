@@ -50,7 +50,7 @@ def multiple_partial(*args, **kwargs):
     return ret_func_list
 
 import sys 
-def print(*args: str, sep=' ', end='\n', file = None):
+def personal_print(*args: str, sep=' ', end='\n', file = None):
     if file == None:
         result = ""
         for i in args:
