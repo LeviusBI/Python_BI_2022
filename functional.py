@@ -18,7 +18,7 @@ def conditional_reduce(*args):
     coll = list(filter(functions_list[0], coll))
     if len(coll) > 1:
         while len(coll) != 1:
-            coll[0]=functions_list[1](coll[0], coll[1])
+            coll[0] = functions_list[1](coll[0], coll[1])
             del coll[1]
         return coll
     else:
