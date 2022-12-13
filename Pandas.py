@@ -3,7 +3,7 @@ import numpy as np
 
 # function to read gff files
 def read_gff(gfffile):
-    df = pd.read_csv(gfffile, sep='\t', comment='t', header = 0, names=['Chromosome', 'source',
+    df = pd.read_csv(gfffile, sep='\t', comment="#", names=['Chromosome', 'source',
                                                                         'type', 'start',
                                                                         'end', 'score',
                                                                         'strand', 'phase', 'atributes'])
