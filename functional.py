@@ -50,13 +50,6 @@ def multiple_partial(*args, **kwargs):
     return ret_func_list
 
 import sys 
-def personal_print(*args: str, sep=' ', end='\n', file = None):
-    if file == None:
-        result = ""
-        for i in args:
-            result += f"{i}{sep}"
-        result+=f"{end}"
-        sys.stdout.write(result)
-    else:
-        with open(file, 'w') as sys.stdout:
-            personal_print(*args, sep, end)
+def personal_print(*args: str, sep=' ', end='\n', file=sys.stdout):
+    result = sep.join(map(str, args)) + end
+    file.write(result)
