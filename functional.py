@@ -1,6 +1,6 @@
 
 def sequential_map_2(*args):
-    *functions_list, coll = [*args]
+    *functions_list, coll = args
     #for i in functions_list:
     #    coll = list(map(i, coll)) это был код до того, как я реализовал func_chain
     #return coll
