@@ -1,7 +1,5 @@
 # Python_BI_2022
 
-Тут я буду ~~говнокодить~~ **решать ДЗ**
-
 In this HW I will performance scripts, that will be able to work from command line. I will use os and sys modules to do my best. I am obliged to do 4 functions and also have 4 optional functions.  
 
 Requirements:
@@ -20,3 +18,5 @@ Programs required for implementation (7 points for each):
 2. ls with -a option
 3. sort without options
 4. rm with -r option
+
+Dependencies can be found in requirements.txt. 
