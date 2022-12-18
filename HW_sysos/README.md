@@ -12,11 +12,9 @@ Requirements:
 The use of downloadable third-party modules is prohibited. Only the standard library can be used (except for the subprocess module).
 6. Running scripts should be possible without the python command (i.e. ./wc.py file.txt instead of python wc.py file.txt)
 
-Programs required for implementation (7 points for each):
+Programs required (7 points for each):
 
 1. wc with options -l -w -c
 2. ls with -a option
 3. sort without options
-4. rm with -r option
-
-Dependencies can be found in requirements.txt. Before running scripts, please write `pip install -r requirements.txt`.
+4. rm with option -r
