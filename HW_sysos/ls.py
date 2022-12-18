@@ -25,11 +25,12 @@ if __name__ == '__main__':
     path = args.path_to_directory
 
     try:
-        files_in_directory = list(sorted(os.listdir(path)))
         if args.all:
-            files_in_directory.extend(['.', '..'])
+            files_in_directory = ['.', '..']
+            files_in_directory += list(sorted(os.listdir(path)))
         else:
-            dir = list(sorted(os.listdir(path)))
+            files_in_directory = sorted(os.listdir(path))
         sys.stdout.write(' '.join(files_in_directory) + '\n')
     except FileNotFoundError:
         sys.stderr.write(f'ls: cannot access \'{path}\': No such file or directory\n')
+

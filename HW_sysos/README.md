@@ -19,4 +19,4 @@ Programs required for implementation (7 points for each):
 3. sort without options
 4. rm with -r option
 
-Dependencies can be found in requirements.txt. 
+Dependencies can be found in requirements.txt. Before running scripts, please write `pip install -r requirements.txt`.
